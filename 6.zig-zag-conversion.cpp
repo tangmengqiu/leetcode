@@ -62,23 +62,14 @@ public:
             return s;
         }
         int size_v=2*numRows-2;
-        int numGroup=(s.size()+size_v-1)/size_v;
-        vector<char>  tmp [numRows];
-        for(int i=0;i < numGroup;i++){
-            int start=i*size_v;
-            int k=0;
-            for(int j=start;j<start+numRows&&j<s.size();j++){
-                tmp[k++].push_back(s[j]);
-            }
-            for(int j=start+numRows;j<start+size_v&&j<s.size();j++){
-                int row=(i+1)*size_v-j;
-                tmp[row].push_back(s[j]);
-            }
-        }
-       string ans;
+        std::string ans;
        for(int i=0;i<numRows;i++){
-           for(auto it=tmp[i].begin();it!=tmp[i].end();it++){
-               ans.push_back(*it);
+           for(int j=i;j<s.size();j+=size_v){
+               ans.push_back(s[j]);
+               int nextJ=size_v+j-2*i;
+               if(i!=0&&nextJ!=j&&nextJ<s.size()){
+                   ans.push_back(s[nextJ]);
+               }
            }
        }
        return ans;
