@@ -15,6 +15,7 @@ public:
             ans.push_back(tmp);
             return ;
         }
+        //make sure that '(' always shown before ')'
         if(left>right)
             return ;
         if(left>0)
