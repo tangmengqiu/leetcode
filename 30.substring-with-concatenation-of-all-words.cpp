@@ -8,47 +8,55 @@
 class Solution {
 public:
     vector<int> findSubstring(string s, vector<string>& words) {\
-        vector<int> ret;
-        if (words.size()==0) return ret;
-        map<string,int> dict;
-        for(string w :words) ++dict[w];
-        int len=words[0].length();
-        int cnt=words.size();
-        int lastScan=0;
-        for(int i=0;i<len;i++){
-            map<string,int> m;
-            int count=0;
-            int left=i;
-            for(int j=i;j<s.length()-len;j+=len){
-                string word=s.substr(j,len);
-                if(dict[word]){
-                    m[word]++;
-                    if(m[word]<=dict[word]){
+       vector<int> ans;
+        int n = s.size(), cnt = words.size();
+        if (n <= 0 || cnt <= 0) return ans;
+        
+        // init word occurence
+        unordered_map<string, int> dict;
+        for (int i = 0; i < cnt; ++i) dict[words[i]]++;
+        
+        // travel all sub string combinations
+        int wl = words[0].size();
+        for (int i = 0; i < wl; ++i) {
+            int left = i, count = 0;
+            unordered_map<string, int> tdict;
+            for (int j = i; j <= n - wl; j += wl) {
+                string str = s.substr(j, wl);
+                // a valid word, accumulate results
+                if (dict.count(str)) {
+                    tdict[str]++;
+                    if (tdict[str] <= dict[str]) 
                         count++;
-                    }else{
-                        while(m[word]>dict[word]){
-                            string w=s.substr(left,len);
-                            m[w]--;
-                            if(m[w]<dict[w]) count--;
-                            left+=len;
+                    else {
+                        // a more word, advance the window left side possiablly
+                        while (tdict[str] > dict[str]) {
+                            string str1 = s.substr(left, wl);
+                            tdict[str1]--;
+                            if (tdict[str1] < dict[str1]) count--;
+                            left += wl;
                         }
                     }
-                    if(count==cnt){
-                        ret.push_back(left);
-                        m[s.substr(left,len)]--;
+                    // come to a result
+                    if (count == cnt) {
+                        ans.push_back(left);
+                        // advance one word
+                        tdict[s.substr(left, wl)]--;
                         count--;
-                        left+=len;
+                        left += wl;
                     }
-                }else{
-                    m.clear();
-                    left+=len;
-                    count=0;
+                }
+                // not a valid word, reset all vars
+                else {
+                    tdict.clear();
+                    count = 0;
+                    left = j + wl;
                 }
             }
         }
-        return ret;
+        
+        return ans;
     }
-   
 };
 // @lc code=end
 
