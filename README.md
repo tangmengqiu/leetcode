@@ -155,13 +155,17 @@ int findFirstEqualLarger(vector<int>& array, int key) {
 问题的性质：求出f(n)，只需要知道几个更小的f(c)。我们将求解f(c)称作求解f(n)的“子问题”。
 
 这就是DP（动态规划，dynamic programming）：
+
 　　将一个问题拆成几个子问题，分别求解这些子问题，即可推断出大问题的解。
 
 求解的方式有两种：①自顶向下的备忘录法 ②自底向上
+
 动态规划的三大步骤
 第一步骤：定义数组元素的含义
+
 第二步骤：找出数组元素之间的关系式（也就是可以利用历史数据来推出新的元素值）
-第三步骤：找出初始值。（即边界，eg.fib[1]）
+
+第三步骤：找出初始值。（即边界）
 
 以85.Maximal Rectangle 为例，计算‘1’所占最大矩形面积：
 
@@ -180,6 +184,8 @@ right[i][j] = min(right[i - 1][j], currRight)， currRight表示ith行而言，�
 第三步:初始化
 
 显然hight 全部初始为0，left也初始为0,right初始为 n。值得注意的是，我们在计算第`i`行的`hight,elft,right`时，只依赖到了第`i-1`行的状态（若当前是'1'，则hight[j]++,即在计算前，hight[j]是上一轮的状态，加个1就好了，同理，left[j]=max(left[j],curLeft),right[j]=min(right[j].curRight);若当前是'0'，则hight归零，【left也归零，curLeft=j+1, right设为n,curRight=j】方便下次计算)，所以不需要用到二维数组，只需要一维数组，保存上一行的状态就可。
+
+另外，数组的初始化，初始为非`0`数值时，不可用`memset`,一定不要（除非是`char`类型）！用`fill`替代！
 
 完整题解：
  [85.maximal-rectangle](https://github.com/tangmengqiu/leetcode/blob/master/85.maximal-rectangle.cpp),
