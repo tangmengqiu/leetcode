@@ -8,6 +8,17 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
+        /*
+            better solution:
+            int counter = 0, majority;
+            for (int num : nums) {
+                if (!counter) {
+                    majority = num;
+                }
+                counter += num == majority ? 1 : -1;
+            }
+            return majority;
+        */
         sort(nums.begin(),nums.end());
         if(nums.size()==1) return nums[0];
         for(int i=0;i<nums.size()-1;i++){
