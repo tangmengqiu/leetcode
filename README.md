@@ -197,5 +197,10 @@ step1: 先沿对角线将元素对换
 step2: 沿中线，将对应两列元素对换
 题解：[48.rotate-image](https://github.com/tangmengqiu/leetcode/blob/master/48.rotate-image.cpp) ,
 
+### 4. 二维数组初始化技巧
+
+```
+vector<vector<int>> dp( m, vector<int>(n,value));
+```
 
 ---
