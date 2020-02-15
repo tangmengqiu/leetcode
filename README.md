@@ -203,4 +203,8 @@ step2: 沿中线，将对应两列元素对换
 vector<vector<int>> dp( m, vector<int>(n,value));
 ```
 
+### 5.链表去重
+思路：不要想着在原链表上直接操作，那样比较麻烦，可以换一条思路，对于当前处理的node，如果它不重复，则把它加入新的一条链表中，如果重复直接跳过。
+详细结题：[82.Remove Duplicates from Sorted List II](https://github.com/tangmengqiu/leetcode/blob/master/82.remove-duplicates-from-sorted-list-ii.cpp)
+
 ---
