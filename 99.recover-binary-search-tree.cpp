@@ -61,7 +61,7 @@ public:
     void helper(TreeNode* root){
         if(!root) return;
         helper(root->left);
-        if(first==NULL&&root->val<=pre->val)first =root;
+        if(first==NULL&&root->val<=pre->val)first = prev;
         if(first!=NULL&&root->val<=pre->val)second =root;
         pre=root;
         helper(root);
