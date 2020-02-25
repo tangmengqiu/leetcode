@@ -20,7 +20,8 @@ Morris不需要为每个节点额外分配指针指向其前驱（predecessor）
 >* 2.1如果mostright的right指针指向空，让其指向cur，cur向左移动（cur=cur.left）
 >* 2.2如果mostright的right指针指向cur，让其指向空，cur向右移动（cur=cur.right）
 
-## 3.根据这两条原则模拟遍历
+## 4.根据这两条原则模拟遍历
+
 ![](https://tva1.sinaimg.cn/large/0082zybpgy1gc8hnh7hxtj30ue0ewjxi.jpg)
 
 * s1: cur=1，其左子树最右的节点是5，根据规则2.1：`node(5).right = 1` cur左移到2
@@ -68,3 +69,13 @@ void morrisPre(TreeNode *root) {
     }
 }
 ```
+
+
+### 3.2实现后序遍历
+后序遍历的处理要复杂一点，基本流程不变，只是在出现触发规则：2.1的时候，将most->right置空，并且cur=cur->right时，要将cur左孩子的反斜45°那条路径（下图虚线所示）上的节点反向遍历，如果不好理解看下图：
+
+![](https://tva1.sinaimg.cn/large/0082zybpgy1gc94h8lh9uj30ys0ochdt.jpg)
+
+例如，当从发现d->right=b=cur时，就将最左的斜线（只包含d)反向遍历：[d],第二次触发 b->right=a=cur时，将第二条斜线反向遍历加入统计：[d,e,b],以此类推，但需要注意最后一个点是g点，需要特殊处理，应该将root(1)->g这条路径方向遍历，所以在处理过程中，每一次cur像右移动，都应该记录下一次，最后的记录就是整个树最右的节点（g)。
+
+例题：[145.二叉树后序遍历](145.binary-tree-postorder-traversal.cpp)
