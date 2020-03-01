@@ -31,3 +31,9 @@ vector<vector<int>> dp( m, vector<int>(n,value));
 ### 6.MorrisTraversal
 
 [MorrisTraversal](https://github.com/tangmengqiu/leetcode/blob/master/notes/MorrisTraversal.md)
+
+### 6.removeDuplicates
+[RemoveDuplicates](https://github.com/tangmengqiu/leetcode/blob/master/notes/RemoveDuplicates.md)
+
+### 7. topk templates
+[TOPK](https://github.com/tangmengqiu/leetcode/blob/master/templates/topk.cpp)
